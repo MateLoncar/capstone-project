@@ -1,7 +1,19 @@
-export default function HomePage() {
+import Head from "next/head";
+import dynamic from "next/dynamic";
+import "../styles";
+
+const Map = dynamic(() => import("../components/Map"), { ssr: false });
+
+export default function Home() {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+      <Head>
+        <title>Word Travel Map</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main>
+        <Map />
+      </main>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+/* styles/global.css */
+
+/* Set the font family for the entire app */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Define a color that can be used throughout the app */
+:root {
+  --primary-color: #0070f3;
+}
