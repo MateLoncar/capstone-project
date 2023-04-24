@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Word Travel Map</title>
+        <title>Word Travel Map App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
