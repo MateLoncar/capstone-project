@@ -1,15 +1,18 @@
-export async function getCoords(placeName) {
-  const response = await fetch(
-    `https://nominatim.openstreetmap.org/search?q=${placeName}&format=json`
-  );
-  const data = await response.json();
+const API_KEY = "c47ef0f73d4f4521ae75cfe29143429b";
 
-  if (data.length === 0) {
+export async function getCoords(placeName) {
+  console.log("place", placeName);
+  const response = await fetch(
+    `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+      placeName
+    )}&key=${API_KEY}`
+  );
+  console.log(response);
+  const data = await response.json();
+  console.log(data);
+  if (data.results.length === 0) {
     throw new Error("Place not found");
   }
 
-  return {
-    lat: parseFloat(data[0].lat),
-    lng: parseFloat(data[0].lon),
-  };
+  return data.results[0];
 }
