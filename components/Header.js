@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import {
+  HeaderWrapper,
+  Title,
+  SearchWrapper,
+  SearchInput,
+  SearchButton,
+} from "./Header.styles";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,18 +23,18 @@ const Header = ({ onSearch }) => {
   };
 
   return (
-    <div className="header">
-      <div className="header__title">World App Map</div>
-      <div className="header__search">
-        <input
+    <HeaderWrapper>
+      <Title>World Travel Map</Title>
+      <SearchWrapper>
+        <SearchInput
           type="text"
-          placeholder="Search for a city or country"
+          placeholder="Search for a place"
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <button onClick={handleSearch}>Go</button>
-      </div>
-    </div>
+        <SearchButton onClick={handleSearch}>Go</SearchButton>
+      </SearchWrapper>
+    </HeaderWrapper>
   );
 };
 
