@@ -6,20 +6,13 @@ import {
   SearchInput,
   SearchButton,
 } from "./Header.styles";
+import { getCoords } from "./utils";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
-  };
-
-  const handleSearch = () => {
-    if (typeof onSearch === "function") {
-      onSearch(searchTerm);
-    } else {
-      console.error("onSearch is not a function");
-    }
   };
 
   return (
@@ -32,7 +25,7 @@ const Header = ({ onSearch }) => {
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <SearchButton onClick={handleSearch}>Go</SearchButton>
+        <SearchButton onClick={() => onSearch(searchTerm)}>Go</SearchButton>
       </SearchWrapper>
     </HeaderWrapper>
   );
