@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import Header from "@/components/Header";
-import { getCoords } from "../components/utils";
+import "../../styles";
+import Header from "@/src/components/Header/Header";
+import { getCoords } from "../services/utils";
+import Tools from "@/src/components/Tools/Tools";
 
-const Map = dynamic(() => import("../components/Map"), { ssr: false });
+const Map = dynamic(() => import("../components/Map/Map"), { ssr: false });
 
 export default function Home() {
   const [searchResult, setSearchResult] = useState(null);
@@ -27,6 +29,7 @@ export default function Home() {
       <main>
         <Header onSearch={handleSearch} />
         <Map searchResult={searchResult} />
+        <Tools />
       </main>
     </div>
   );
