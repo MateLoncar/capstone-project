@@ -5,9 +5,11 @@ import "../../styles";
 import Header from "@/src/components/Header/Header";
 import { getCoords } from "../services/utils";
 import Tools from "@/src/components/Tools/Tools";
-import { MapContainer } from "react-leaflet";
 
-const Map = dynamic(() => import("../components/Map/Map"), { ssr: false });
+const MapWrapper = dynamic(
+  () => import("../components/MapWrapper/MapWrapper"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [searchResult, setSearchResult] = useState(null);
@@ -30,13 +32,11 @@ export default function Home() {
       </Head>
       <main>
         <Header onSearch={handleSearch} />
-        <MapContainer
-          center={[51.505, -0.09]}
-          zoom={13}
-          style={{ height: "500px" }}
-        >
-          <Map isAddingMarker={isAddingMarker} searchResult={searchResult} />
-        </MapContainer>
+
+        <MapWrapper
+          isAddingMarker={isAddingMarker}
+          searchResult={searchResult}
+        />
 
         <Tools
           isAddingMarker={isAddingMarker}
