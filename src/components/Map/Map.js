@@ -15,9 +15,12 @@ function LocationMarker({ coords }) {
   return null;
 }
 
-function AddMarker({ handleAddMarker }) {
+function Map({ searchResult, isAddingMarker }) {
   const map = useMapEvents({
     click: (e) => {
+      if (!isAddingMarker) {
+        return;
+      }
       console.log("clicked", e);
       handleAddMarker({
         id: crypto.randomUUID(),
@@ -26,11 +29,6 @@ function AddMarker({ handleAddMarker }) {
       });
     },
   });
-
-  return null;
-}
-
-function Map({ searchResult }) {
   const [markers, setMarkers] = useState(initialMarkers);
   function handleAddMarker(marker) {
     setMarkers([...markers, marker]);
@@ -41,11 +39,7 @@ function Map({ searchResult }) {
   }
 
   return (
-    <MapContainer
-      center={[51.505, -0.09]}
-      zoom={13}
-      style={{ height: "500px" }}
-    >
+    <>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
@@ -58,13 +52,13 @@ function Map({ searchResult }) {
           <LocationMarker coords={searchResult} />
         </>
       )}
-      <AddMarker handleAddMarker={handleAddMarker} />
+
       {markers.map((marker) => (
         <Marker key={marker.id} position={[marker.lat, marker.long]}>
           <CustomPopup onDelete={() => handleDeleteMarker(marker.id)} />
         </Marker>
       ))}
-    </MapContainer>
+    </>
   );
 }
 

@@ -8,7 +8,8 @@ import {
 } from "./Popup.styles";
 
 const CustomPopup = ({ onWasThereClick, onWantThereClick, onDelete }) => {
-  function handleDeleteClick() {
+  function handleDeleteClick(e) {
+    e.stopPropagation();
     onDelete();
   }
 
