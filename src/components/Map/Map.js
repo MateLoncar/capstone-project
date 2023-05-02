@@ -15,17 +15,15 @@ function LocationMarker({ coords }) {
   return null;
 }
 
-function AddMarker({ handleAddMarker, isAddingMarker }) {
+function AddMarker({ handleAddMarker }) {
   const map = useMapEvents({
     click: (e) => {
       console.log("clicked", e);
-      if (isAddingMarker) {
-        handleAddMarker({
-          id: crypto.randomUUID(),
-          lat: e.latlng.lat,
-          long: e.latlng.lng,
-        });
-      }
+      handleAddMarker({
+        id: crypto.randomUUID(),
+        lat: e.latlng.lat,
+        long: e.latlng.lng,
+      });
     },
   });
 
@@ -34,19 +32,12 @@ function AddMarker({ handleAddMarker, isAddingMarker }) {
 
 function Map({ searchResult }) {
   const [markers, setMarkers] = useState(initialMarkers);
-  const [isAddingMarker, setIsAddingMarker] = useState(false);
-
   function handleAddMarker(marker) {
     setMarkers([...markers, marker]);
-    setIsAddingMarker(false);
   }
 
   function handleDeleteMarker(markerId) {
     setMarkers(markers.filter((marker) => marker.id !== markerId));
-  }
-
-  function handleMarkerButtonClick() {
-    setIsAddingMarker(!isAddingMarker);
   }
 
   return (
@@ -67,19 +58,12 @@ function Map({ searchResult }) {
           <LocationMarker coords={searchResult} />
         </>
       )}
-      <AddMarker
-        handleAddMarker={handleAddMarker}
-        isAddingMarker={isAddingMarker}
-      />
+      <AddMarker handleAddMarker={handleAddMarker} />
       {markers.map((marker) => (
         <Marker key={marker.id} position={[marker.lat, marker.long]}>
           <CustomPopup onDelete={() => handleDeleteMarker(marker.id)} />
         </Marker>
       ))}
-      <Tools
-        isAddingMarker={isAddingMarker}
-        toggleAddingMarker={() => setIsAddingMarker(!isAddingMarker)}
-      />
     </MapContainer>
   );
 }
