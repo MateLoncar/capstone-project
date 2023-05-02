@@ -45,7 +45,7 @@ function Map({ searchResult }) {
     setMarkers(markers.filter((marker) => marker.id !== markerId));
   }
 
-  function toggleAddingMarker() {
+  function handleMarkerButtonClick() {
     setIsAddingMarker(!isAddingMarker);
   }
 
@@ -77,8 +77,8 @@ function Map({ searchResult }) {
         </Marker>
       ))}
       <Tools
-        toggleAddingMarker={toggleAddingMarker}
         isAddingMarker={isAddingMarker}
+        toggleAddingMarker={() => setIsAddingMarker(!isAddingMarker)}
       />
     </MapContainer>
   );

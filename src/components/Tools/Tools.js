@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { MarkerButton, FooterWrapper } from "./Tools.styles";
 
-function Tools({ isAddingMarker, setIsAddingMarker }) {
+function Tools({ isAddingMarker, toggleAddingMarker }) {
   function handleMarkerButtonClick() {
-    setIsAddingMarker(!isAddingMarker);
+    toggleAddingMarker();
   }
 
   return (

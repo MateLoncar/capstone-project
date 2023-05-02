@@ -11,6 +11,7 @@ const Map = dynamic(() => import("../components/Map/Map"), { ssr: false });
 export default function Home() {
   const [searchResult, setSearchResult] = useState(null);
   const [coords, setCoords] = useState({ lat: 51.505, lng: -0.09 });
+  const [isAddingMarker, setIsAddingMarker] = useState(false);
   const handleSearch = async (searchTerm) => {
     try {
       const coords = await getCoords(searchTerm);
@@ -29,7 +30,10 @@ export default function Home() {
       <main>
         <Header onSearch={handleSearch} />
         <Map searchResult={searchResult} />
-        <Tools />
+        <Tools
+          isAddingMarker={isAddingMarker}
+          toggleAddingMarker={() => setIsAddingMarker(!isAddingMarker)}
+        />
       </main>
     </div>
   );
