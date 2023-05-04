@@ -17,8 +17,12 @@ const CustomPopup = ({ onWasThereClick, onWantThereClick, onDelete }) => {
     <PopupContainer>
       <Popup className="custom-popup" isOpen={true}>
         <Container>
-          <Button onClick={onWasThereClick}>I was there</Button>
-          <Button onClick={onWantThereClick}>I want to go there</Button>
+          <Button className="was-there-button" onClick={onWasThereClick}>
+            I was there
+          </Button>
+          <Button className="want-there-button" onClick={onWantThereClick}>
+            I want to go there
+          </Button>
           <DeleteButton className="delete-button" onClick={handleDeleteClick}>
             Delete
           </DeleteButton>

@@ -1,48 +1,60 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const Button = styled.button`
-  margin: 5px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1976d2;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #1565c0;
+export const PopupContainer = styled.div`
+  .custom-popup {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    padding: 10px;
   }
 `;
 
-export const PopupContainer = styled.div`
-  .custom-popup {
-    background-color: red;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const Button = styled.button`
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &.was-there-button {
+    background-color: green;
+    color: white;
+    border: none;
+  }
+
+  &.want-there-button {
+    background-color: orange;
+    color: white;
+    border: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
 `;
 
 export const DeleteButton = styled.button`
-  display: inline-block;
-  width: 50px;
-  height: 20px;
-  line-height: 1;
-  text-align: center;
-  background-color: #f44336;
-  color: #fff;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
   border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
 `;
