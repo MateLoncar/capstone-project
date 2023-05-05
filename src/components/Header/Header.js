@@ -6,13 +6,19 @@ import {
   SearchInput,
   SearchButton,
 } from "./Header.styles";
-import { getCoords } from "./utils";
+import { getCoords } from "../../services/utils";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      onSearch(searchTerm);
+    }
   };
 
   return (
@@ -24,6 +30,7 @@ const Header = ({ onSearch }) => {
           placeholder="Search for a place"
           value={searchTerm}
           onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
         />
         <SearchButton onClick={() => onSearch(searchTerm)}>Go</SearchButton>
       </SearchWrapper>
