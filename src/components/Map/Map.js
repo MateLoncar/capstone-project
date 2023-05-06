@@ -6,9 +6,25 @@ import { useMapEvents } from "react-leaflet";
 import { useState } from "react";
 import CustomPopup from "../Popup/Popup";
 import Tools from "../Tools/Tools";
+import * as L from "leaflet";
 
 const initialMarkers = [];
 
+const LeafIcon = L.Icon.extend({
+  options: {},
+});
+const blueIcon = new LeafIcon({
+    iconUrl:
+      "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FFA500&chf=a,s,ee00FFFF",
+  }),
+  greenIcon = new LeafIcon({
+    iconUrl:
+      "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF",
+  });
+
+function getIcon(marker) {
+  return greenIcon;
+}
 function LocationMarker({ coords }) {
   const map = useMap();
   map.flyTo([coords.geometry.lat, coords.geometry.lng], 13);
@@ -38,6 +54,10 @@ function Map({ searchResult, isAddingMarker }) {
     setMarkers(markers.filter((marker) => marker.id !== markerId));
   }
 
+  function handleUpdateMarker(markerId, data) {
+    console.log(markerId, data);
+  }
+
   return (
     <>
       <TileLayer
@@ -54,8 +74,15 @@ function Map({ searchResult, isAddingMarker }) {
       )}
 
       {markers.map((marker) => (
-        <Marker key={marker.id} position={[marker.lat, marker.long]}>
-          <CustomPopup onDelete={() => handleDeleteMarker(marker.id)} />
+        <Marker
+          icon={getIcon(marker)}
+          key={marker.id}
+          position={[marker.lat, marker.long]}
+        >
+          <CustomPopup
+            onUpdate={(data) => handleUpdateMarker(marker.id, data)}
+            onDelete={() => handleDeleteMarker(marker.id)}
+          />
         </Marker>
       ))}
     </>
