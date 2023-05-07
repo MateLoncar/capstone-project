@@ -3,7 +3,7 @@ import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
 import { useMapEvents } from "react-leaflet";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CustomPopup from "../Popup/Popup";
 import Tools from "../Tools/Tools";
 import * as L from "leaflet";
@@ -23,8 +23,12 @@ const blueIcon = new LeafIcon({
   });
 
 function getIcon(marker) {
-  return greenIcon;
+  if (marker.isVisited) {
+    return greenIcon ;
+  }
+  return blueIcon;
 }
+
 function LocationMarker({ coords }) {
   const map = useMap();
   map.flyTo([coords.geometry.lat, coords.geometry.lng], 13);
@@ -55,7 +59,40 @@ function Map({ searchResult, isAddingMarker }) {
   }
 
   function handleUpdateMarker(markerId, data) {
-    console.log(markerId, data);
+    const updatedMarkers = markers.map((marker) => {
+      if (marker.id === markerId) {
+        return { ...marker, ...data };
+      }
+      return marker;
+    });
+    setMarkers(updatedMarkers);
+  }
+
+  function MarkerLayer({ markers }) {
+    return (
+      <>
+        {markers.map((marker) => {
+          const markerRef = useRef(null);
+          const icon = getIcon(marker);
+  
+          return (
+            <Marker
+              icon={icon}
+              key={marker.id}
+              position={[marker.lat, marker.long]}
+              ref={markerRef}
+            >
+              <CustomPopup
+                onUpdate={(data) => handleUpdateMarker(marker.id, data)}
+                onDelete={() => handleDeleteMarker(marker.id)}
+                markerRef={markerRef}
+                isVisited={marker.isVisited}
+              />
+            </Marker>
+          );
+        })}
+      </>
+    );
   }
 
   return (
@@ -72,19 +109,7 @@ function Map({ searchResult, isAddingMarker }) {
           <LocationMarker coords={searchResult} />
         </>
       )}
-
-      {markers.map((marker) => (
-        <Marker
-          icon={getIcon(marker)}
-          key={marker.id}
-          position={[marker.lat, marker.long]}
-        >
-          <CustomPopup
-            onUpdate={(data) => handleUpdateMarker(marker.id, data)}
-            onDelete={() => handleDeleteMarker(marker.id)}
-          />
-        </Marker>
-      ))}
+      <MarkerLayer markers={markers} />
     </>
   );
 }
