@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { MarkerButton, FooterWrapper } from "./Tools.styles";
 
 function Tools({ isAddingMarker, toggleAddingMarker }) {
-  console.log("in Tools");
   function handleMarkerButtonClick() {
-    console.log("in handleMarkerButtonClick");
     toggleAddingMarker();
   }
 

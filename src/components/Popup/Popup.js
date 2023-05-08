@@ -8,12 +8,12 @@ import {
 } from "./Popup.styles";
 import WasTherePopup from "./WasTherePopup";
 
-const CustomPopup = ({ onDelete, onUpdate, markerRef, isVisited }) => {
+const CustomPopup = ({ onDelete, onUpdate }) => {
   const [showWasTherePopup, setShowWasTherePopup] = useState(false);
 
   function handleWasThereClick(e) {
     e.stopPropagation();
-    onUpdate({ isVisited: true });
+    //onUpdate({ isVisited: true });
     setShowWasTherePopup(true);
   }
 
@@ -32,13 +32,16 @@ const CustomPopup = ({ onDelete, onUpdate, markerRef, isVisited }) => {
   return (
     <PopupContainer>
       <Popup className="custom-popup" isOpen={true}>
-        {!isVisited && (
+        {!showWasTherePopup && (
           <Container>
             <Button className="was-there-button" onClick={handleWasThereClick}>
               I was there
             </Button>
 
-            <Button className="want-there-button" onClick={handleWantThereClick}>
+            <Button
+              className="want-there-button"
+              onClick={handleWantThereClick}
+            >
               I want to go there
             </Button>
 
@@ -47,11 +50,12 @@ const CustomPopup = ({ onDelete, onUpdate, markerRef, isVisited }) => {
             </DeleteButton>
           </Container>
         )}
-        {isVisited && (
+        {showWasTherePopup && (
           <WasTherePopup
+            onUpdate={onUpdate}
+            onDelete={onDelete}
             onSubmit={onUpdate}
             onClose={() => setShowWasTherePopup(false)}
-            markerRef={markerRef}
           />
         )}
       </Popup>

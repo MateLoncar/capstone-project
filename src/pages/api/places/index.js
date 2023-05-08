@@ -1,4 +1,4 @@
-import dbConnect from "../../../library/connect";
+import dbConnect from "../../../../lib/connect";
 import Place from "../../../../lib/models/Place";
 
 export default async function handler(request, response) {
@@ -12,10 +12,11 @@ export default async function handler(request, response) {
 
   if (request.method === "POST") {
     try {
+      console.log(request.body);
       const placeData = request.body;
-      await Wisdom.create(placeData);
+      const newPlace = await Place.create(placeData);
 
-      response.status(201).json({ status: "Place created" });
+      response.status(201).json({ status: "Place created", ...newPlace._doc });
     } catch (error) {
       response.status(400).json({ error: error.message });
     }

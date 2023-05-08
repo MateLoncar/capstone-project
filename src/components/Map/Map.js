@@ -3,7 +3,7 @@ import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
 import { useMapEvents } from "react-leaflet";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import CustomPopup from "../Popup/Popup";
 import Tools from "../Tools/Tools";
 import * as L from "leaflet";
@@ -24,7 +24,7 @@ const blueIcon = new LeafIcon({
 
 function getIcon(marker) {
   if (marker.isVisited) {
-    return greenIcon ;
+    return greenIcon;
   }
   return blueIcon;
 }
@@ -35,32 +35,72 @@ function LocationMarker({ coords }) {
   return null;
 }
 
+async function createMarker(marker) {
+  const response = await fetch("/api/places", {
+    method: "POST",
+    body: JSON.stringify(marker),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function updateMarker(id, marker) {
+  const response = await fetch(`/api/places/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(marker),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
+}
+
 function Map({ searchResult, isAddingMarker }) {
   const map = useMapEvents({
     click: (e) => {
       if (!isAddingMarker) {
         return;
       }
-      console.log("clicked", e);
+
       handleAddMarker({
-        id: crypto.randomUUID(),
+        //   _id: crypto.randomUUID(),
         lat: e.latlng.lat,
-        long: e.latlng.lng,
+        lng: e.latlng.lng,
+        isVisited: false,
+        stars: 0,
+        image: "",
+        expirience: "",
       });
     },
   });
   const [markers, setMarkers] = useState(initialMarkers);
-  function handleAddMarker(marker) {
+
+  useEffect(() => {
+    async function getPlaces() {
+      const response = await fetch("/api/places");
+      const data = await response.json();
+      setMarkers(data);
+    }
+    getPlaces();
+  }, []);
+
+  async function handleAddMarker(data) {
+    const marker = await createMarker(data);
     setMarkers([...markers, marker]);
   }
 
   function handleDeleteMarker(markerId) {
-    setMarkers(markers.filter((marker) => marker.id !== markerId));
+    setMarkers(markers.filter((marker) => marker._id !== markerId));
   }
 
-  function handleUpdateMarker(markerId, data) {
+  async function handleUpdateMarker(markerId, data) {
+    await updateMarker(markerId, data);
     const updatedMarkers = markers.map((marker) => {
-      if (marker.id === markerId) {
+      if (marker._id === markerId) {
         return { ...marker, ...data };
       }
       return marker;
@@ -72,20 +112,17 @@ function Map({ searchResult, isAddingMarker }) {
     return (
       <>
         {markers.map((marker) => {
-          const markerRef = useRef(null);
           const icon = getIcon(marker);
-  
+
           return (
             <Marker
               icon={icon}
-              key={marker.id}
-              position={[marker.lat, marker.long]}
-              ref={markerRef}
+              key={marker._id}
+              position={[marker.lat, marker.lng]}
             >
               <CustomPopup
-                onUpdate={(data) => handleUpdateMarker(marker.id, data)}
-                onDelete={() => handleDeleteMarker(marker.id)}
-                markerRef={markerRef}
+                onUpdate={(data) => handleUpdateMarker(marker._id, data)}
+                onDelete={() => handleDeleteMarker(marker._id)}
                 isVisited={marker.isVisited}
               />
             </Marker>
