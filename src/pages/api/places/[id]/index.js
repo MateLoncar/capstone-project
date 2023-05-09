@@ -16,15 +16,27 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "PUT") {
-    await Place.findByIdAndUpdate(id, {
-      $set: request.body,
-    });
+    try {
+      const response = await Place.findByIdAndUpdate(id, {
+        $set: request.body,
+      });
 
-    response.status(200).json({ status: `Place ${id} updated!` });
+      const updatedPlace = await Place.findById(id);
+      response.status(200).json(updatedPlace);
+    } catch (error) {
+      console.log(error);
+      response.status(500).json({ error: error.message });
+    }
   }
-  if (request.method === "DELETE") {
-    await Place.findByIdAndDelete(id);
 
-    response.status(200).json({ status: `Place ${id} successfully deleted.` });
+  if (request.method === "DELETE") {
+    try {
+      await Place.findByIdAndDelete(id);
+      response
+        .status(200)
+        .json({ status: `Place ${id} successfully deleted.` });
+    } catch (error) {
+      response.status(500).json({ error: error.message });
+    }
   }
 }

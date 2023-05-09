@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  background-color: #f5f5f5;
+  background-color: white;
   padding: 10px;
 `;
 
 export const Title = styled.div`
   font-size: 24px;
   font-weight: bold;
+  color: teal;
+  font-family: sans-serif;
 `;
 
 export const SearchWrapper = styled.div`
@@ -19,10 +21,11 @@ export const SearchInput = styled.input`
   margin-right: 10px;
   border: none;
   border-radius: 3px;
+  box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.58);
 `;
 
 export const SearchButton = styled.button`
-  background-color: #007bff;
+  background-color: teal;
   color: #fff;
   padding: 5px 10px;
   border: none;

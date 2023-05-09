@@ -9,7 +9,7 @@ function Tools({ isAddingMarker, toggleAddingMarker }) {
   return (
     <FooterWrapper>
       <MarkerButton
-        style={{ backgroundColor: isAddingMarker ? "#449d44" : "#5cb85c" }}
+        isAddingMarker={isAddingMarker}
         onClick={handleMarkerButtonClick}
       >
         {isAddingMarker ? "Cancel" : "Add Marker"}

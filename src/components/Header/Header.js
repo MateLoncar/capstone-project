@@ -6,7 +6,6 @@ import {
   SearchInput,
   SearchButton,
 } from "./Header.styles";
-import { getCoords } from "../../services/utils";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");

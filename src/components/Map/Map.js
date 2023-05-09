@@ -29,8 +29,9 @@ function getIcon(marker) {
   return blueIcon;
 }
 
-function LocationMarker({ coords }) {
+function LocationMarker({ coords, isAddingMarker }) {
   const map = useMap();
+  if (isAddingMarker) return;
   map.flyTo([coords.geometry.lat, coords.geometry.lng], 13);
   return null;
 }
@@ -92,25 +93,33 @@ function Map({ searchResult, isAddingMarker }) {
     setMarkers([...markers, marker]);
   }
 
-  function handleDeleteMarker(markerId) {
+  async function handleDeleteMarker(markerId) {
+    console.log("aa");
+    const response = await fetch(`/api/places/${markerId}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    if (data.status === 400 || updateMarker.error) {
+      setError("Error updating marker");
+      return;
+    }
     setMarkers(markers.filter((marker) => marker._id !== markerId));
   }
 
   async function handleUpdateMarker(markerId, data) {
-    try {
-      const response = await updateMarker(markerId, data);
-      const updatedMarkers = markers.map((marker) => {
-        if (marker._id === markerId) {
-          return { ...marker, ...data };
-        }
-        return marker;
-      });
-      setMarkers(updatedMarkers);
-      return response;
-    } catch (error) {
-      console.error(error);
-      return { error: "Something went wrong while updating the marker." };
+    const response = await updateMarker(markerId, data);
+    if (response.status === 400 || updateMarker.error) {
+      setError("Error updating marker");
+      return;
     }
+
+    const updatedMarkers = markers.map((marker) => {
+      if (marker._id === markerId) {
+        return { ...marker, ...data };
+      }
+      return marker;
+    });
+    setMarkers(updatedMarkers);
   }
 
   function MarkerLayer({ markers }) {
@@ -148,7 +157,10 @@ function Map({ searchResult, isAddingMarker }) {
           <Marker
             position={[searchResult.geometry.lat, searchResult.geometry.lng]}
           />
-          <LocationMarker coords={searchResult} />
+          <LocationMarker
+            coords={searchResult}
+            isAddingMarker={isAddingMarker}
+          />
         </>
       )}
       <MarkerLayer markers={markers} />

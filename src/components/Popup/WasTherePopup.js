@@ -133,7 +133,7 @@ const WasTherePopup = ({ onSubmit, onDelete }) => {
         </RatingContainer>
 
         <SubmitButton type="submit">Submit</SubmitButton>
-        <DeleteButton className="delete-button" onClick={handleDeleteClick}>
+        <DeleteButton type="button" onClick={handleDeleteClick}>
           Delete
         </DeleteButton>
       </form>
