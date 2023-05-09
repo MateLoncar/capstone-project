@@ -8,8 +8,6 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     const place = await Place.findById(id);
 
-    console.log({ id });
-
     if (!place) {
       return response.status(404).json({ status: "Not Found" });
     }

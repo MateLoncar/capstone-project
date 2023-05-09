@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Popup } from "react-leaflet";
 import {
   Container,
@@ -13,19 +13,16 @@ const CustomPopup = ({ onDelete, onUpdate }) => {
 
   function handleWasThereClick(e) {
     e.stopPropagation();
-    //onUpdate({ isVisited: true });
     setShowWasTherePopup(true);
   }
 
   function handleWantThereClick(e) {
     e.stopPropagation();
     onUpdate({ isVisited: false });
-    //setShowWantTherePopup(true);
   }
 
   function handleDeleteClick(e) {
     e.stopPropagation();
-    onUpdate({ isVisited: false });
     onDelete();
   }
 

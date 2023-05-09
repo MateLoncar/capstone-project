@@ -67,13 +67,12 @@ function Map({ searchResult, isAddingMarker }) {
       }
 
       handleAddMarker({
-        //   _id: crypto.randomUUID(),
         lat: e.latlng.lat,
         lng: e.latlng.lng,
         isVisited: false,
         stars: 0,
         image: "",
-        expirience: "",
+        experience: "",
       });
     },
   });
@@ -98,14 +97,20 @@ function Map({ searchResult, isAddingMarker }) {
   }
 
   async function handleUpdateMarker(markerId, data) {
-    await updateMarker(markerId, data);
-    const updatedMarkers = markers.map((marker) => {
-      if (marker._id === markerId) {
-        return { ...marker, ...data };
-      }
-      return marker;
-    });
-    setMarkers(updatedMarkers);
+    try {
+      const response = await updateMarker(markerId, data);
+      const updatedMarkers = markers.map((marker) => {
+        if (marker._id === markerId) {
+          return { ...marker, ...data };
+        }
+        return marker;
+      });
+      setMarkers(updatedMarkers);
+      return response;
+    } catch (error) {
+      console.error(error);
+      return { error: "Something went wrong while updating the marker." };
+    }
   }
 
   function MarkerLayer({ markers }) {
