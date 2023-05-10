@@ -11,7 +11,7 @@ import {
   RatingContainer,
   Star,
   BackButton,
-} from "./experiences.style";
+} from "../../components/Tools/experiences.style";
 
 export default function SinglePlace() {
   const router = useRouter();
