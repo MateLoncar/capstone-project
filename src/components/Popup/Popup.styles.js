@@ -1,48 +1,67 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const Button = styled.button`
-  margin: 5px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1976d2;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #1565c0;
+export const PopupContainer = styled.div`
+  .custom-popup {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    padding: 10px;
   }
 `;
 
-export const PopupContainer = styled.div`
-  .custom-popup {
-    background-color: red;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const Button = styled.button`
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &.was-there-button {
+    background-color: green;
+    color: white;
+    border: none;
+  }
+
+  &.want-there-button {
+    background-color: orange;
+    color: white;
+    border: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
 `;
 
 export const DeleteButton = styled.button`
-  display: inline-block;
-  width: 50px;
-  height: 20px;
-  line-height: 1;
-  text-align: center;
-  background-color: #f44336;
-  color: #fff;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
+  position: fixed;
+  bottom: 5px;
+  right: 2px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+`;
+
+export const ExperienceButton = styled.button`
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 
   &:hover {
-    background-color: #d32f2f;
+    background-color: #ccc;
   }
 `;

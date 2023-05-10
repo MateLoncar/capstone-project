@@ -5,13 +5,19 @@ import "../../styles";
 import Header from "@/src/components/Header/Header";
 import { getCoords } from "../services/utils";
 import Tools from "@/src/components/Tools/Tools";
+import WasTherePopup from "../components/Popup/WasTherePopup";
 
 const MapWrapper = dynamic(
   () => import("../components/MapWrapper/MapWrapper"),
   { ssr: false }
 );
 
-export default function Home() {
+export default function Home({
+  showWasTherePopup,
+  wasThereLocation,
+  onWasTherePopupClose,
+  onWasThereClick,
+}) {
   const [searchResult, setSearchResult] = useState(null);
   const [coords, setCoords] = useState({ lat: 51.505, lng: -0.09 });
   const [isAddingMarker, setIsAddingMarker] = useState(false);
@@ -36,6 +42,7 @@ export default function Home() {
         <MapWrapper
           isAddingMarker={isAddingMarker}
           searchResult={searchResult}
+          onWasThereClick={onWasThereClick}
         />
 
         <Tools
@@ -43,6 +50,12 @@ export default function Home() {
           toggleAddingMarker={() => setIsAddingMarker(!isAddingMarker)}
         />
       </main>
+      {showWasTherePopup && (
+        <WasTherePopup
+          location={wasThereLocation}
+          onClose={onWasTherePopupClose}
+        />
+      )}
     </div>
   );
 }
