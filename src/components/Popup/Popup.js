@@ -7,8 +7,12 @@ import {
   DeleteButton,
 } from "./Popup.styles";
 import WasTherePopup from "./WasTherePopup";
+import styled from "styled-components";
+import Link from "next/link";
+import { marker } from "leaflet";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
-const CustomPopup = ({ onDelete, onUpdate }) => {
+const CustomPopup = ({ onDelete, onUpdate, marker }) => {
   const [showWasTherePopup, setShowWasTherePopup] = useState(false);
 
   function handleWasThereClick(e) {
@@ -32,18 +36,18 @@ const CustomPopup = ({ onDelete, onUpdate }) => {
         {!showWasTherePopup && (
           <Container>
             <Button className="was-there-button" onClick={handleWasThereClick}>
-              I was there
+              was there
             </Button>
 
             <Button
               className="want-there-button"
               onClick={handleWantThereClick}
             >
-              I want to go there
+              wanna go
             </Button>
-
+            <Link href={`/places/${marker._id}`}>Experience</Link>
             <DeleteButton className="delete-button" onClick={handleDeleteClick}>
-              Delete
+              <MdOutlineDeleteOutline color="red" size={18} />
             </DeleteButton>
           </Container>
         )}

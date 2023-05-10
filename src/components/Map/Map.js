@@ -15,11 +15,11 @@ const LeafIcon = L.Icon.extend({
 });
 const blueIcon = new LeafIcon({
     iconUrl:
-      "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FFA500&chf=a,s,ee00FFFF",
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png",
   }),
   greenIcon = new LeafIcon({
     iconUrl:
-      "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF",
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png",
   });
 
 function getIcon(marker) {
@@ -94,7 +94,6 @@ function Map({ searchResult, isAddingMarker }) {
   }
 
   async function handleDeleteMarker(markerId) {
-    console.log("aa");
     const response = await fetch(`/api/places/${markerId}`, {
       method: "DELETE",
     });
@@ -138,6 +137,7 @@ function Map({ searchResult, isAddingMarker }) {
                 onUpdate={(data) => handleUpdateMarker(marker._id, data)}
                 onDelete={() => handleDeleteMarker(marker._id)}
                 isVisited={marker.isVisited}
+                marker={marker}
               />
             </Marker>
           );

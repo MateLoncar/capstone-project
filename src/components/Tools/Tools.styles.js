@@ -9,7 +9,7 @@ export const FooterWrapper = styled.div`
 `;
 
 export const MarkerButton = styled.button`
-  background-color: ${(props) => (props.isAddingMarker ? "purple" : "teal")};
+  background-color: ${(props) => (props.isAddingMarker ? "red" : "teal")};
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -17,6 +17,6 @@ export const MarkerButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: purple;
+    background-color: teal;
   }
 `;

@@ -88,7 +88,12 @@ const WasTherePopup = ({ onSubmit, onDelete }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const experienceData = { text, imageUrl, rating, isVisited: true };
+    const experienceData = {
+      experience: text,
+      image: imageUrl,
+      stars: rating,
+      isVisited: true,
+    };
     onSubmit(experienceData);
   }
 

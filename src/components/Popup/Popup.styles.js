@@ -44,17 +44,24 @@ export const Button = styled.button`
 `;
 
 export const DeleteButton = styled.button`
-  background-color: red;
-  color: white;
+  position: fixed;
+  bottom: 5px;
+  right: 2px;
+  background-color: transparent;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+`;
+
+export const ExperienceButton = styled.button`
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: #ccc;
   }
 `;

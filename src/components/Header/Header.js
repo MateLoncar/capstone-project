@@ -6,6 +6,8 @@ import {
   SearchInput,
   SearchButton,
 } from "./Header.styles";
+import { GiCompass } from "react-icons/gi";
+import { MdTravelExplore } from "react-icons/md";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,7 +24,10 @@ const Header = ({ onSearch }) => {
 
   return (
     <HeaderWrapper>
-      <Title>World Travel Map</Title>
+      <Title>
+        World Travel Map <GiCompass /> <MdTravelExplore />
+      </Title>
+
       <SearchWrapper>
         <SearchInput
           type="text"
