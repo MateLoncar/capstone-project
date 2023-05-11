@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import {
   PlaceCard,
   PlaceImage,
   PlaceTitle,
   PlaceText,
-  ImageLink,
-  ImageText,
   RatingContainer,
   Star,
   BackButton,
   ExperienceWrapper,
+  StyledImage,
 } from "../../components/Tools/experiences.style";
 
 export default function SinglePlace() {
@@ -38,14 +38,16 @@ export default function SinglePlace() {
   const handleBack = () => {
     router.back();
   };
-
+  console.log(place);
   return (
     <ExperienceWrapper>
       <BackButton onClick={handleBack}>
         <IoReturnUpBack color="teal" size={24} />
       </BackButton>
       <PlaceCard>
-        <PlaceTitle>Experience:</PlaceTitle>
+        <PlaceImage>
+          <StyledImage src={place.image} alt={place.description} />
+        </PlaceImage>
         <RatingContainer>
           {[1, 2, 3, 4, 5].map((value) => (
             <Star key={value} selected={value <= place.stars}>
@@ -53,16 +55,9 @@ export default function SinglePlace() {
             </Star>
           ))}
         </RatingContainer>
+        <PlaceTitle>Experience:</PlaceTitle>
+
         <PlaceText>{place.experience}</PlaceText>
-        <PlaceImage>
-          <ImageLink
-            href={place.image}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ImageText>{place.image}</ImageText>
-          </ImageLink>
-        </PlaceImage>
       </PlaceCard>
     </ExperienceWrapper>
   );

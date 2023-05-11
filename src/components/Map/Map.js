@@ -15,7 +15,7 @@ const LeafIcon = L.Icon.extend({
 });
 const blueIcon = new LeafIcon({
     iconUrl:
-      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png",
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png",
   }),
   greenIcon = new LeafIcon({
     iconUrl:
@@ -106,6 +106,7 @@ function Map({ searchResult, isAddingMarker }) {
   }
 
   async function handleUpdateMarker(markerId, data) {
+    console.log(data);
     const response = await updateMarker(markerId, data);
     if (response.status === 400 || updateMarker.error) {
       setError("Error updating marker");

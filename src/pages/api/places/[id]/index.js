@@ -57,4 +57,17 @@ export default async function handler(request, response) {
       response.status(500).json({ error: "Failed to fetch place details" });
     }
   }
+
+  if (request.method === "PATCH") {
+    try {
+      const newPlace = new Place(request.body);
+
+      await newPlace.save();
+
+      response.status(201).json(newPlace);
+    } catch (error) {
+      console.error("Error creating new place:", error);
+      response.status(500).json({ error: "Failed to create new place" });
+    }
+  }
 }

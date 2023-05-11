@@ -9,12 +9,18 @@ export const PlaceCard = styled.div`
 `;
 
 export const PlaceImage = styled.div`
-  width: 100%;
-  max-height: 200px;
+  width: 300px;
+  height: 200px;
   background-color: teal;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 8px;
 `;
 
@@ -30,7 +36,7 @@ export const ImageText = styled.p`
 `;
 
 export const PlaceTitle = styled.h3`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   color: teal;
   margin-top: 5px;
@@ -50,6 +56,7 @@ export const PlaceText = styled.p`
   font-size: 16px;
   color: grey;
   margin-top: 5px;
+  word-wrap: break-word;
 `;
 
 export const StarIcon = styled.span`

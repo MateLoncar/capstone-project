@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { DeleteButton } from "./Popup.styles";
-
+import { MdOutlineDeleteOutline } from "react-icons/md";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,8 +52,8 @@ const SubmitButton = styled.button`
   padding: 8px 12px;
   font-size: 18px;
   font-weight: bold;
-  background-color: #e6e6e6;
-  color: #333;
+  background-color: teal;
+  color: white;
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease-in-out;
@@ -139,7 +139,7 @@ const WasTherePopup = ({ onSubmit, onDelete }) => {
 
         <SubmitButton type="submit">Submit</SubmitButton>
         <DeleteButton type="button" onClick={handleDeleteClick}>
-          Delete
+          <MdOutlineDeleteOutline color="red" size={18} />
         </DeleteButton>
       </form>
     </Container>

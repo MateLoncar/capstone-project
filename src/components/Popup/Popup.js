@@ -5,6 +5,7 @@ import {
   Button,
   PopupContainer,
   DeleteButton,
+  ButtonRow,
 } from "./Popup.styles";
 import WasTherePopup from "./WasTherePopup";
 import styled from "styled-components";
@@ -35,16 +36,22 @@ const CustomPopup = ({ onDelete, onUpdate, marker }) => {
       <Popup className="custom-popup" isOpen={true}>
         {!showWasTherePopup && (
           <Container>
-            <Button className="was-there-button" onClick={handleWasThereClick}>
-              was there
-            </Button>
+            <ButtonRow>
+              {" "}
+              <Button
+                className="was-there-button"
+                onClick={handleWasThereClick}
+              >
+                WAS THERE
+              </Button>
+              <Button
+                className="want-there-button"
+                onClick={handleWantThereClick}
+              >
+                WANNA GO
+              </Button>
+            </ButtonRow>
 
-            <Button
-              className="want-there-button"
-              onClick={handleWantThereClick}
-            >
-              wanna go
-            </Button>
             <Link href={`/places/${marker._id}`}>Experience</Link>
             <DeleteButton className="delete-button" onClick={handleDeleteClick}>
               <MdOutlineDeleteOutline color="red" size={18} />

@@ -19,9 +19,10 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.button`
+  margin: 2px;
   padding: 10px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
@@ -29,11 +30,13 @@ export const Button = styled.button`
     background-color: green;
     color: white;
     border: none;
+    font-family: sans-serif;
   }
 
   &.want-there-button {
-    background-color: orange;
+    background-color: #ffc93c;
     color: white;
+    font-family: sans-serif;
     border: none;
   }
 
@@ -64,4 +67,12 @@ export const ExperienceButton = styled.button`
   &:hover {
     background-color: #ccc;
   }
+`;
+
+export const ButtonRow = styled.div`
+  display: flex;
+`;
+
+export const SubmitButton = styled.button`
+  color: teal;
 `;
