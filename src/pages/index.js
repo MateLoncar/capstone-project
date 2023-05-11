@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import "../../styles";
 import Header from "@/src/components/Header/Header";
 import { getCoords } from "../services/utils";
 import Tools from "@/src/components/Tools/Tools";
