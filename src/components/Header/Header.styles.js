@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  background-color: white;
+  background-color: #f2f2f2;
   padding: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.div`
@@ -30,4 +33,5 @@ export const SearchButton = styled.button`
   padding: 5px 10px;
   border: none;
   border-radius: 3px;
+  box-shadow: outset 1px 1px 2px 1px rgba(0, 0, 0, 0.58);
 `;

@@ -65,3 +65,11 @@ export const BackButton = styled.button`
   cursor: pointer;
   z-index: 9999;
 `;
+
+export const ExperienceWrapper = styled.div`
+  background-color: #f2f2f2;
+  padding: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+`;

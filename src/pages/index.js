@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import "../../styles";
+import styles from "./styles";
 import Header from "@/src/components/Header/Header";
 import { getCoords } from "../services/utils";
 import Tools from "@/src/components/Tools/Tools";
@@ -31,7 +31,7 @@ export default function Home({
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
         <title>Word Travel Map App</title>
         <link rel="icon" href="/favicon.ico" />

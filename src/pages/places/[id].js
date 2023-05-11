@@ -11,6 +11,7 @@ import {
   RatingContainer,
   Star,
   BackButton,
+  ExperienceWrapper,
 } from "../../components/Tools/experiences.style";
 
 export default function SinglePlace() {
@@ -39,7 +40,7 @@ export default function SinglePlace() {
   };
 
   return (
-    <>
+    <ExperienceWrapper>
       <BackButton onClick={handleBack}>
         <IoReturnUpBack color="teal" size={24} />
       </BackButton>
@@ -63,6 +64,6 @@ export default function SinglePlace() {
           </ImageLink>
         </PlaceImage>
       </PlaceCard>
-    </>
+    </ExperienceWrapper>
   );
 }
