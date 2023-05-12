@@ -106,7 +106,6 @@ function Map({ searchResult, isAddingMarker }) {
   }
 
   async function handleUpdateMarker(markerId, data) {
-    console.log(data);
     const response = await updateMarker(markerId, data);
     if (response.status === 400 || updateMarker.error) {
       setError("Error updating marker");
